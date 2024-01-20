@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+    }
+    #main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+    h1 {
+      color: #33ffe4;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    button {
+      font-size: 1.2em;
+      padding: 15px 30px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+      position: relative;
+      z-index: 3;
+      background-color: #33ffe4;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    function moveButton(event) {
+      const button = document.getElementById('no-button');
+      const rect = button.getBoundingClientRect();
+      const mouseX = event.clientX;
+      const mouseY = event.clientY;
+
+      const deltaX = mouseX - (30 * rect.left + rect.width / 2);
+      const deltaY = mouseY - (40 * rect.top + rect.height / 2);
+
+      button.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    }
+
+    function resetButton() {
+      const button = document.getElementById('no-button');
+      button.style.transform = 'translate(0, 0)';
+    }
+
+    function startFireworks() {
+      particlesJS('particles-js', {
+        particles: {
+          number: {
+            value: 80,
+            density: {
+              enable: true,
+              value_area: 800,
+            },
+          },
+          color: {
+            value: ['#ff5733', '#33ccff', '#66ff66', '#ffcc00'],
+          },
+          shape: {
+            type: 'circle',
+            stroke: {
+              width: 0,
+              color: '#000000',
+            },
+            polygon: {
+              nb_sides: 5,
+            },
+          },
+          opacity: {
+            value: 0.8,
+            random: true,
+            anim: {
+              enable: false,
+              speed: 1,
+              opacity_min: 0.1,
+              sync: false,
+            },
+          },
+          size: {
+            value: 5,
+            random: true,
+            anim: {
+              enable: false,
+              speed: 40,
+              size_min: 0.1,
+              sync: false,
+            },
+          },
+          line_linked: {
+            enable: false,
+          },
+          move: {
+            enable: true,
+            speed: 8,
+            direction: 'bottom',
+            random: true,
+            straight: false,
+            out_mode: 'out',
+            bounce: false,
+            attract: {
+              enable: false,
+              rotateX: 600,
+              rotateY: 1200,
+            },
+          },
+        },
+        interactivity: {
+          detect_on: 'canvas',
+          events: {
+            onhover: {
+              enable: true,
+              mode: 'bubble',
+            },
+            onclick: {
+              enable: false,
+              mode: 'repulse',
+            },
+            resize: true,
+          },
+          modes: {
+            bubble: {
+              distance: 400,
+              size: 10,
+              duration: 2,
+              opacity: 1,
+              speed: 3,
+            },
+            repulse: {
+              distance: 200,
+              duration: 0.4,
+            },
+          },
+        },
+        retina_detect: true,
+      });
+    }
+  </script>
+</head>
+<body>
+  <div id="main-container">
+    <h1>Would you like to go out with me?</h1>
+    <button id="no-button" onmousemove="moveButton(event)" onmouseout="resetButton()">No</button>
+    <button onclick="startFireworks()">Yes</button>
+  </div>
+  <div id="particles-js"></div>
+</body>
+</html>
